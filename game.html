@@ -77,6 +77,10 @@
                 document.getElementById('chance').innerHTML = "It's System's chance.";
             }
           }
+          function change(){
+            var color=promt("enter color");
+            document.body.style.backgroundColor=color;
+          }
           setInterval(pchance, 1000);
           function check() {
             if (ap1[ap1.length - 1] !== p1) {
