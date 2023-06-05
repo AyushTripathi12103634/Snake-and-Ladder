@@ -192,6 +192,10 @@
           };
       
           function play() {
+              if(players==1 && player==2){
+                alert("it's not your turn!");
+                return;
+            }
             if (player === 1) {
               var randomNumber = Math.floor(Math.random() * 6) + 1;
               alert("Player " + player + ", your number is: " + randomNumber);
