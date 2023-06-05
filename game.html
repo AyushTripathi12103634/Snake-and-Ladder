@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake and Ladder</title>
+    <style>
+        .heading{
+            color: red;
+            position: absolute;
+            top: 5px;
+            left: 500px;
+        }
+        .heading:hover{
+            color: blue;
+            cursor: default;
+        }
+        table{
+            position: absolute;
+            top: 70px;
+            left: 10px;
+        }
+        td{
+            border: 2px solid;
+            height: 50px;
+            width: 140px;
+            text-align: center;
+        }
+        .image{
+            height: 50px;
+            width: 50px;
+        }
+        #p1{
+            z-index: 2;
+            height: 30px;
+            width: 30px;
+            top: 595px; /* 595 */
+            position: absolute;
+        }
+        #p2{
+            z-index: 2;
+            height: 30px;
+            width: 30px;
+            top: 619px;
+            position: absolute;
+        }
+        .snake{
+            height: 30px;
+            width: 30px;
+        }
+        .ladder{
+            height: 30px;
+            width: 30px;
+        }
+        #chance{
+            top: 5px;
+            position: absolute;
+            left: 90px;
+            font-size: 20px;
+        }
+    </style>
+    <script>
+          const urlParams = new URLSearchParams(window.location.search);
+          const players = urlParams.get('players');
+          var player = 1;
+          var p1 = 0;
+          var p2 = 0;
+          var ap1 = [0];
+          var ap2 = [0];
+          var intervalId = setInterval(check, 1500);
+          function pchance(){
+            if(player==1 || (player==2 && players==2)){
+                document.getElementById('chance').innerHTML = "It's Player "+player+" chance.";
+            }
+            else{
+                document.getElementById('chance').innerHTML = "It's System's chance.";
+            }
+          }
+          setInterval(pchance, 1000);
+          function check() {
+            if (ap1[ap1.length - 1] !== p1) {
+              alert("Player p1 has cheated!");
+              p1 = ap1[ap1.length - 1];
+            } else if (ap2[ap2.length - 1] !== p2) {
+              alert("Player p2 has cheated!");
+              p2 = ap2[ap2.length - 1];
+            }
+          }
+      
+          var map={
+            1: "position: absolute; top: 605px; left: 0055px;",
+            2: "position: absolute; top: 605px; left: 0185px;",
+            3: "position: absolute; top: 320px; left: 0055px;",
+            4: "position: absolute; top: 605px; left: 445px;",
+            5: "position: absolute; top: 605px; left: 570px;",
+            6: "position: absolute; top: 490px; left: 820px;",
+            7: "position: absolute; top: 605px; left: 820px;",
+            8: "position: absolute; top: 605px; left: 945px;",
+            9: "position: absolute; top: 605px; left: 1075px;",
+            10: "position: absolute; top: 605px; left: 1195px;",
+            11: "position: absolute; top: 545px; left: 0055px;",
+            12: "position: absolute; top: 545px; left: 0185px;",
+            13: "position: absolute; top: 545px; left: 315px;",
+            14: "position: absolute; top: 545px; left: 445px;",
+            15: "position: absolute; top: 545px; left: 570px;",
+            16: "position: absolute; top: 545px; left: 695px;",
+            17: "position: absolute; top: 545px; left: 820px;",
+            18: "position: absolute; top: 545px; left: 945px;",
+            19: "position: absolute; top: 545px; left: 1075px;",
+            20: "position: absolute; top: 260px; left: 1195px;",
+            21: "position: absolute; top: 490px; left: 0055px;",
+            22: "position: absolute; top: 490px; left: 0185px;",
+            23: "position: absolute; top: 490px; left: 315px;",
+            24: "position: absolute; top: 490px; left: 445px;",
+            25: "position: absolute; top: 605px; left: 570px;",
+            26: "position: absolute; top: 490px; left: 695px;",
+            27: "position: absolute; top: 490px; left: 820px;",
+            28: "position: absolute; top: 490px; left: 945px;",
+            29: "position: absolute; top: 490px; left: 1075px;",
+            30: "position: absolute; top: 490px; left: 1195px;",
+            31: "position: absolute; top: 430px; left: 0055px;",
+            32: "position: absolute; top: 430px; left: 0185px;",
+            33: "position: absolute; top: 430px; left: 315px;",
+            34: "position: absolute; top: 605px; left: 1075px;",
+            35: "position: absolute; top: 430px; left: 570px;",
+            36: "position: absolute; top: 320px; left: 570px;",
+            37: "position: absolute; top: 430px; left: 820px;",
+            38: "position: absolute; top: 430px; left: 945px;",
+            39: "position: absolute; top: 430px; left: 1075px;",
+            40: "position: absolute; top: 430px; left: 1195px;",
+            41: "position: absolute; top: 370px; left: 0055px;",
+            42: "position: absolute; top: 370px; left: 0185px;",
+            43: "position: absolute; top: 370px; left: 315px;",
+            44: "position: absolute; top: 370px; left: 445px;",
+            45: "position: absolute; top: 370px; left: 570px;",
+            46: "position: absolute; top: 370px; left: 695px;",
+            47: "position: absolute; top: 545px; left: 1075px;",
+            48: "position: absolute; top: 370px; left: 945px;",
+            49: "position: absolute; top: 370px; left: 1075px;",
+            50: "position: absolute; top: 370px; left: 1195px;",
+            51: "position: absolute; top: 320px; left: 0055px;",
+            52: "position: absolute; top: 320px; left: 0185px;",
+            53: "position: absolute; top: 320px; left: 315px;",
+            54: "position: absolute; top: 320px; left: 445px;",
+            55: "position: absolute; top: 320px; left: 570px;",
+            56: "position: absolute; top: 320px; left: 695px;",
+            57: "position: absolute; top: 320px; left: 820px;",
+            58: "position: absolute; top: 320px; left: 945px;",
+            59: "position: absolute; top: 320px; left: 1075px;",
+            60: "position: absolute; top: 320px; left: 1195px;",
+            61: "position: absolute; top: 260px; left: 0055px;",
+            62: "position: absolute; top: 260px; left: 0185px;",
+            63: "position: absolute; top: 80px; left: 570px;",
+            64: "position: absolute; top: 260px; left: 445px;",
+            65: "position: absolute; top: 320px; left: 0185px;",
+            66: "position: absolute; top: 260px; left: 695px;",
+            67: "position: absolute; top: 260px; left: 820px;",
+            68: "position: absolute; top: 80px; left: 945px;",
+            69: "position: absolute; top: 260px; left: 1075px;",
+            70: "position: absolute; top: 260px; left: 1195px;",
+            71: "position: absolute; top: 200px; left: 0055px;",
+            72: "position: absolute; top: 200px; left: 0185px;",
+            73: "position: absolute; top: 200px; left: 315px;",
+            74: "position: absolute; top: 200px; left: 445px;",
+            75: "position: absolute; top: 200px; left: 570px;",
+            76: "position: absolute; top: 200px; left: 695px;",
+            77: "position: absolute; top: 200px; left: 820px;",
+            78: "position: absolute; top: 200px; left: 945px;",
+            79: "position: absolute; top: 200px; left: 1075px;",
+            80: "position: absolute; top: 200px; left: 1195px;",
+            81: "position: absolute; top: 140px; left: 0055px;",
+            82: "position: absolute; top: 140px; left: 0185px;",
+            83: "position: absolute; top: 140px; left: 315px;",
+            84: "position: absolute; top: 140px; left: 445px;",
+            85: "position: absolute; top: 140px; left: 570px;",
+            86: "position: absolute; top: 140px; left: 695px;",
+            87: "position: absolute; top: 320px; left: 820px;",
+            88: "position: absolute; top: 140px; left: 945px;",
+            89: "position: absolute; top: 140px; left: 1075px;",
+            90: "position: absolute; top: 140px; left: 1195px;",
+            91: "position: absolute; top: 260px; left: 0055px;",
+            92: "position: absolute; top: 80px; left: 0185px;",
+            93: "position: absolute; top: 80px; left: 315px;",
+            94: "position: absolute; top: 80px; left: 445px;",
+            95: "position: absolute; top: 80px; left: 570px;",
+            96: "position: absolute; top: 80px; left: 695px;",
+            97: "position: absolute; top: 80px; left: 820px;",
+            98: "position: absolute; top: 80px; left: 945px;",
+            99: "position: absolute; top: 605px; left: 0055px;",
+            100: "position: absolute; top: 80px; left: 1195px;"
+          };
+      
+          function play() {
+            if (player === 1) {
+              var randomNumber = Math.floor(Math.random() * 6) + 1;
+              alert("Player " + player + ", your number is: " + randomNumber);
+              if (p1 + randomNumber <= 100) {
+                p1 += randomNumber;
+                switch (p1){
+                  case 3:
+                      p1=51;
+                      break;
+                  case 6:
+                      p1=27;
+                      break;
+                  case 20:
+                      p1=70;
+                      break;
+                  case 25:
+                      p1=5;
+                      break;
+                  case 34:
+                      p1=9;
+                      break;
+                  case 36:
+                      p1=55;
+                      break;
+                  case 47:
+                      p1=19;
+                      break;
+                  case 63:
+                      p1=95;
+                      break;
+                  case 65:
+                      p1=52;
+                      break;
+                  case 68:
+                      p1=98;
+                      break;
+                  case 87:
+                      p1=57;
+                      break;
+                  case 91:
+                      p1=61;
+                      break;
+                  case 99:
+                      p1=1;
+                      break;
+                  default:
+                      p1+=0;
+                }
+                if (map.hasOwnProperty(p1)) {
+                    var cssProperties = map[p1];
+                    var element = document.getElementById("p1");
+                    if (element) {
+                        element.style.cssText = cssProperties;
+                    }
+                }
+                document.getElementById("p1v").innerHTML="player 1: "+p1;
+                ap1.push(p1);
+                player = 2;
+                if (players==1){
+                    setTimeout(function() {
+                    var randomNumber = Math.floor(Math.random() * 6) + 1;
+                    alert("player 2(pc) got: "+randomNumber);
+                    if (p2 + randomNumber <= 100) {
+                        p2 += randomNumber;
+                        switch (p2){
+                            case 3:
+                                p2=51;
+                                break;
+                            case 6:
+                                p2=27;
+                                break;
+                            case 20:
+                                p2=70;
+                                break;
+                            case 25:
+                                p2=5;
+                                break;
+                            case 34:
+                                p2=9;
+                                break;
+                            case 36:
+                                p2=55;
+                                break;
+                            case 47:
+                                p2=19;
+                                break;
+                            case 63:
+                                p2=95;
+                                break;
+                            case 65:
+                                p2=52;
+                                break;
+                            case 68:
+                                p2=98;
+                                break;
+                            case 87:
+                                p2=57;
+                                break;
+                            case 91:
+                                p2=61;
+                                break;
+                            case 99:
+                                p2=1;
+                                break;
+                            default:
+                                p2+=0;
+                            }
+                        if (map.hasOwnProperty(p2)) {
+                            var cssProperties = map[p2];
+                            var element = document.getElementById("p2");
+                            if (element) {
+                                element.style.cssText = cssProperties;
+                            }
+                        }
+                        document.getElementById("p2v").innerHTML="player 2: "+p2;
+                        ap2.push(p2);
+                        player = 1;
+                    }
+                    }, 1000); 
+                }
+            }
+            } else if (player == 2 && players!=1) {
+              var randomNumber = Math.floor(Math.random() * 6) + 1;
+              alert("Player " + player + ", your number is: " + randomNumber);
+              if (p2 + randomNumber <= 100) {
+                p2 += randomNumber;
+                switch (p2){
+                  case 3:
+                      p2=51;
+                      break;
+                  case 6:
+                      p2=27;
+                      break;
+                  case 20:
+                      p2=70;
+                      break;
+                  case 25:
+                      p2=5;
+                      break;
+                  case 34:
+                      p2=9;
+                      break;
+                  case 36:
+                      p2=55;
+                      break;
+                  case 47:
+                      p2=19;
+                      break;
+                  case 63:
+                      p2=95;
+                      break;
+                  case 65:
+                      p2=52;
+                      break;
+                  case 68:
+                      p2=98;
+                      break;
+                  case 87:
+                      p2=57;
+                      break;
+                  case 91:
+                      p2=61;
+                      break;
+                  case 99:
+                      p2=1;
+                      break;
+                  default:
+                      p2+=0;
+              }
+                if (map.hasOwnProperty(p2)) {
+                    var cssProperties = map[p2];
+                    var element = document.getElementById("p2");
+                    if (element) {
+                        element.style.cssText = cssProperties;
+                    }
+                }
+                document.getElementById("p2v").innerHTML="player 2: "+p2;
+                ap2.push(p2);
+                player = 1;
+              }
+            }
+      
+            if (p1 === 100) {
+              alert("Player 1 wins!");
+              clearInterval(intervalId);
+            } else if (p2 === 100 && players!=1) {
+              alert("Player 2 wins!");
+              clearInterval(intervalId);
+            } else if (p2 === 100 && players==1){
+              alert("System wins!");
+              clearInterval(intervalId);
+            }
+          }
+      </script>
+      
+</head>
+<body>
+    <div>
+        <button onclick="play()"><img class="image" src="https://img.clipartlook.com/dice-clipart-clipart-dice-3-800.png" alt="dice img"></button>
+        <p id="chance">It's Player 1 chance Now</p>
+    </div>
+    <div>
+        <h1 class="heading" onclick="change()">Snake And Ladder</h1>
+    </div>
+    <div>
+        <table style="position: absolute; top: 10px; left: 1080px;">
+            <tr>
+                <td id="p1v" style="width: 100px;">player 1: 0</td>
+                <td id="p2v" style="width: 100px;">player 2: 0</td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <table>
+            <tr>
+                <td><img class="snake" src="https://th.bing.com/th/id/OIP.yelkRRqVa0nvs_itUY8DGAHaI8?pid=ImgDet&rs=1" alt="snake">->61</td>
+                <td>92</td>
+                <td>93</td>
+                <td>94</td>
+                <td>95</td>
+                <td>96</td>
+                <td>97</td>
+                <td>98</td>
+                <td><img class="snake" src="https://th.bing.com/th/id/OIP.yelkRRqVa0nvs_itUY8DGAHaI8?pid=ImgDet&rs=1" alt="snake">->1</td>
+                <td>100</td>
+            </tr>
+            <tr>
+                <td>81</td>
+                <td>82</td>
+                <td>83</td>
+                <td>84</td>
+                <td>85</td>
+                <td>86</td>
+                <td><img class="snake" src="https://th.bing.com/th/id/OIP.yelkRRqVa0nvs_itUY8DGAHaI8?pid=ImgDet&rs=1" alt="snake">->57</td>
+                <td>88</td>
+                <td>89</td>
+                <td>90</td>
+            </tr>
+            <tr>
+                <td>71</td>
+                <td>72</td>
+                <td>73</td>
+                <td>74</td>
+                <td>75</td>
+                <td>76</td>
+                <td>77</td>
+                <td>78</td>
+                <td>79</td>
+                <td>80</td>
+            </tr>
+            <tr>
+                <td>61</td>
+                <td>62</td>
+                <td><img class="ladder" src="https://th.bing.com/th/id/OIP.VNBakqxoYS_JZ3Mpj2utVAHaNl?pid=ImgDet&rs=1" alt="ladder">->95</td>
+                <td>64</td>
+                <td><img class="snake" src="https://th.bing.com/th/id/OIP.yelkRRqVa0nvs_itUY8DGAHaI8?pid=ImgDet&rs=1" alt="snake">->52</td>
+                <td>66</td>
+                <td>67</td>
+                <td><img class="ladder" src="https://th.bing.com/th/id/OIP.VNBakqxoYS_JZ3Mpj2utVAHaNl?pid=ImgDet&rs=1" alt="ladder">->98</td>
+                <td>69</td>
+                <td>70</td>
+            </tr>
+            <tr>
+                <td>51</td>
+                <td>52</td>
+                <td>53</td>
+                <td>54</td>
+                <td>55</td>
+                <td>56</td>
+                <td>57</td>
+                <td>58</td>
+                <td>59</td>
+                <td>60</td>
+            </tr>
+            <tr>
+                <td>41</td>
+                <td>42</td>
+                <td>43</td>
+                <td>44</td>
+                <td>45</td>
+                <td>46</td>
+                <td><img class="snake" src="https://th.bing.com/th/id/OIP.yelkRRqVa0nvs_itUY8DGAHaI8?pid=ImgDet&rs=1" alt="snake">->19</td>
+                <td>48</td>
+                <td>49</td>
+                <td>50</td>
+            </tr>
+            <tr>
+                <td>31</td>
+                <td>32</td>
+                <td>33</td>
+                <td><img class="snake" src="https://th.bing.com/th/id/OIP.yelkRRqVa0nvs_itUY8DGAHaI8?pid=ImgDet&rs=1" alt="snake">->9</td>
+                <td>35</td>
+                <td><img class="ladder" src="https://th.bing.com/th/id/OIP.VNBakqxoYS_JZ3Mpj2utVAHaNl?pid=ImgDet&rs=1" alt="ladder">->55</td>
+                <td>37</td>
+                <td>38</td>
+                <td>39</td>
+                <td>40</td>
+            </tr>
+            <tr>
+                <td>21</td>
+                <td>22</td>
+                <td>23</td>
+                <td>24</td>
+                <td><img class="snake" src="https://th.bing.com/th/id/OIP.yelkRRqVa0nvs_itUY8DGAHaI8?pid=ImgDet&rs=1" alt="snake">->5</td>
+                <td>26</td>
+                <td>27</td>
+                <td>28</td>
+                <td>29</td>
+                <td>30</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>12</td>
+                <td>13</td>
+                <td>14</td>
+                <td>15</td>
+                <td>16</td>
+                <td>17</td>
+                <td>18</td>
+                <td>19</td>
+                <td><img class="ladder" src="https://th.bing.com/th/id/OIP.VNBakqxoYS_JZ3Mpj2utVAHaNl?pid=ImgDet&rs=1" alt="ladder">->70</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td><img class="ladder" src="https://th.bing.com/th/id/OIP.VNBakqxoYS_JZ3Mpj2utVAHaNl?pid=ImgDet&rs=1" alt="ladder">->51</td>
+                <td>4</td>
+                <td>5</td>
+                <td><img class="ladder" src="https://th.bing.com/th/id/OIP.VNBakqxoYS_JZ3Mpj2utVAHaNl?pid=ImgDet&rs=1" alt="ladder">->27</td>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+                <td>10</td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <img src="https://i.ebayimg.com/images/g/QBoAAOSwKtdfXFT3/s-l300.jpg" alt="p1" id="p1">
+        <img src="https://i.ebayimg.com/images/g/I9cAAOSwHBJfXFS6/s-l400.jpg" alt="p2" id="p2">
+    </div>
+</body>
+</html>
