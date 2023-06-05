@@ -381,12 +381,15 @@
             if (p1 === 100) {
               alert("Player 1 wins!");
               clearInterval(intervalId);
+              location.reload();
             } else if (p2 === 100 && players!=1) {
               alert("Player 2 wins!");
               clearInterval(intervalId);
+              location.reload();
             } else if (p2 === 100 && players==1){
               alert("System wins!");
               clearInterval(intervalId);
+              location.reload();
             }
           }
       </script>
