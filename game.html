@@ -59,6 +59,111 @@
             left: 90px;
             font-size: 20px;
         }
+        @media (max-width: 1250px) {
+            td{
+                height: 50px;
+                width: 100px;
+            }
+            #p1{
+                height: 30px;
+                width: 30px;
+                top: 595px;
+            }
+            #p2{
+                height: 30px;
+                width: 30px;
+                top: 619px;
+            }
+            .p12{
+                left: 875px;
+            }
+            .heading{
+                left: 400px;
+            }
+        }
+        @media (max-width: 1100px) {
+            td{
+                height: 50px;
+                width: 65px;
+            }
+            .heading{
+                top: 5px;
+                left: 250px;
+            }
+            #p1{
+                top: 725px;
+            }
+            #p2{
+                top: 749px;
+            }
+            .p12{
+                left: 525px;
+                top: 100px;
+            }
+            table{
+                top: 200px;
+            }
+            .playing{
+                top: 100px;
+                position: absolute;
+            }
+            p{
+                display: contents;
+            }
+        }
+        @media (max-width: 700px){
+            .image{
+                height: 15px;
+                width: 15px;
+            }
+            .snake{
+                width: 15px;
+                height: 15px;
+            }
+            .ladder{
+                width: 15px;
+                height: 15px;
+            }
+            #p1{
+                top: 775px;
+            }
+            #p2{
+                top: 805px;
+            }
+            .p12{
+                left: 265px;
+            }
+            .playing{
+                top: 200px;
+                left: 275px;
+            }
+            table{
+                top: 250px;
+            }
+        }
+        @media (max-width: 550px){
+            .snake{
+                width: 5px;
+                height: 5px;
+            }
+            .ladder{
+                width: 5px;
+                height: 5px;
+            }
+            .p12{
+                left: 100px;
+            }
+            .heading{
+                left: 75px;
+            }
+            .playing{
+                top: 200px;
+                left: 100px;
+            }
+            td{
+                font-size: 10px;
+            }
+        }
     </style>
     <script>
           const urlParams = new URLSearchParams(window.location.search);
